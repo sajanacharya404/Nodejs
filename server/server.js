@@ -13,6 +13,9 @@ const app = express();
 //database connection
 connectDB();
 
+//middleware
+app.use(express.json());
+
 //routes
 app.use("/api/v1", userRoutes);
 
