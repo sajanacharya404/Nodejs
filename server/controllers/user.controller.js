@@ -1,6 +1,8 @@
 import { User } from "../models/user.model.js";
 import { generateHash } from "../utils/passwordUtils.js";
 import { comparePasswords } from "../utils/passwordUtils.js";
+import jwt from "jsonwebtoken";
+
 export const registerUser = async (req, res) => {
   const { name, email, password, address } = req.body;
   try {
@@ -33,7 +35,14 @@ export const loginUser = async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({ message: "Incorrect username/password !" });
     }
-    res.status(200).json({ message: "Login successfully !" });
+    const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    const { password: pass, ...rest } = existingUser._doc;
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ message: "Login successfully !", token, rest });
   } catch (error) {
     res.status(500).json({ message: "Internal server error !" });
   }
