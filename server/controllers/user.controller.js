@@ -13,8 +13,14 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await generateHash(password);
 
     // const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ name, email, password: hashedPassword, address });
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      address,
+    });
     await user.save();
+
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ message: "Internal server error !" });
@@ -35,9 +41,13 @@ export const loginUser = async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({ message: "Incorrect username/password !" });
     }
-    const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: existingUser._id, role: existingUser.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     const { password: pass, ...rest } = existingUser._doc;
     res
       .cookie("access_token", token, { httpOnly: true })
