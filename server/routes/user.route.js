@@ -7,15 +7,15 @@ import {
   registerUser,
   updateUser,
 } from "../controllers/user.controller.js";
-import { auth } from "../middlewares/authMiddleware.js";
+import { verifyToken } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get("/users", auth, getUsers);
+router.get("/users", verifyToken, getUsers);
 router.get("/user/:id", getUserById);
-router.delete("/user/:id", deleteUserById);
+router.delete("/user", verifyToken, deleteUserById);
 router.patch("/update/:id", updateUser);
 
 export default router;
