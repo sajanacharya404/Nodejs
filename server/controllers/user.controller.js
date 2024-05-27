@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import { CustomError } from "../utils/customError.js";
 import { generateHash } from "../utils/passwordUtils.js";
 import { comparePasswords } from "../utils/passwordUtils.js";
 import jwt from "jsonwebtoken";
@@ -73,6 +74,7 @@ export const getUserById = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Internal server error !" });
+    throw CustomError("Internal server error !", 500);
   }
 };
 
