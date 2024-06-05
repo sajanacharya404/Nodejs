@@ -1,10 +1,17 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ handleChange }) => {
+  const handleNameChange = (event) => {
+    console.log(event);
+    handleChange(event.target.value);
+  };
   return (
     <>
-      <h1>Hello</h1>
-      <p>From navbar</p>
+      <input
+        type="text"
+        className="border border-black p-5 "
+        onChange={handleNameChange}
+      />
     </>
   );
 };
