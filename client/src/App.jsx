@@ -1,34 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 
 const App = () => {
-  const [name, setName] = useState("null");
-  // const name = ""
-  const handleChange = (abcd) => {
-    setName(abcd);
-  };
   return (
-    <>
-      {/* to render element  */}
-      <Navbar handleChange={handleChange} />
-      <p>{name}</p>
-      {/* <button onClick={handleChange} className="bg-gray-400">
-        Click
-      </button> */}
-    </>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
   );
 };
 
 export default App;
-
-//jsx have only one parent element
-// React.Fragment   <div>jello</div>;
-//{} to write javascript inside html
-//props
-
-// useState
-// useEffect
-// useRef
-// useMemo
-// useCallback
-// useReducer
