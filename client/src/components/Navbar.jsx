@@ -5,15 +5,19 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center  ">
       <ul className="flex bg-slate-600 justify-between w-full p-5 text-white">
-        <Link to={"/"}>
-          <li>Home</li>
-        </Link>
-        <Link to={"/about"}>
-          <li>About</li>
-        </Link>
-        <Link to={"/contact"}>
-          <li>Contact</li>
-        </Link>
+        <span>
+          <Link to={"/"}>
+            <li>Home</li>
+          </Link>
+        </span>
+        <span className="flex gap-5">
+          <Link to={"/login"}>
+            <li>Login</li>
+          </Link>
+          <Link to={"/register"}>
+            <li>Register</li>
+          </Link>
+        </span>
       </ul>
     </div>
   );
