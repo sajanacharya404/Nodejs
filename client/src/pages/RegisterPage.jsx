@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const [name, setName] = useState("ram");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
 
+  const navigate = useNavigate();
   // const handleNameChange = (e) => {
   //   setName(e.target.value);
   // };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.post("http://localhost:8000/api/v1/register", {
         name,
@@ -20,6 +23,7 @@ const RegisterPage = () => {
         password,
         address,
       });
+      navigate("/login");
       console.log(res);
     } catch (error) {
       console.log(error);
