@@ -4,13 +4,16 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import PrivateRoute from "./protected/PrivateRoute";
 
 const App = () => {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
