@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import PrivateRoute from "./protected/PrivateRoute";
 import NotFound from "./components/Notfound";
 import BookDetails from "./pages/BookDetails";
+import EditBook from "./pages/EditBook";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/bookdetails/:id" element={<BookDetails />} />
+        <Route path="/updatebook/:id" element={<EditBook />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
